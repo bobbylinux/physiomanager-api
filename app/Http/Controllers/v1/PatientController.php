@@ -2,11 +2,26 @@
 
 namespace App\Http\Controllers\v1;
 
+use App\Services\v1\PatientService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PatientController extends Controller
 {
+    /**
+     * Private actributes
+     */
+    private $patients;
+
+    /**
+     * Construct the class and Dependency Injection.
+     *
+     */
+    public function __construct(PatientService $patients)
+    {
+        $this->patients = $patients;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +29,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->patients->getPatients();
+
+        return response()->json($data);
     }
 
     /**
