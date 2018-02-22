@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// /api/v1/flights
+// /api/v1/patients
 Route::resource('v1/patients',v1\PatientController::class, [
     'except' => ['create','edit']
 ]);
