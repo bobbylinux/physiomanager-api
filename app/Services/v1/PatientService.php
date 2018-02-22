@@ -25,7 +25,8 @@ class PatientService
                 'tax_code' => $patient->tax_code,
                 'sex' => $patient->sex,
                 'birthday' => $birthday->format('d-m-Y'),
-                'city_of_birth' => $patient->city_of_birth
+                'city_of_birth' => $patient->city_of_birth,
+                'href' => route('patients.show',['id' => $patient->id])
             );
 
             $data[]=$item;
