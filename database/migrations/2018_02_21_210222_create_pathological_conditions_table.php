@@ -15,6 +15,8 @@ class CreatePathologicalConditionsTable extends Migration
     {
         Schema::create('pathological_conditions', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('description');
+            $table->morphs('author');
             $table->timestamps();
         });
     }

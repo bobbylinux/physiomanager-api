@@ -15,6 +15,9 @@ class PhysiotherapistsTable extends Migration
     {
         Schema::create('physiotherapists', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('last_name', 255);
+            $table->string('first_name', 255);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }

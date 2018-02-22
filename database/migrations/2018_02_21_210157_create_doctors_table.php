@@ -15,7 +15,13 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('last_name', 255);
+            $table->string('first_name', 255);
+            $table->integer('discipline_id');
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
+            /*foreign keys*/
+            $table->foreign('discipline_id')->references('id')->on('disciplines');
         });
     }
 
