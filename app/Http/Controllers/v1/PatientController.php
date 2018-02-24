@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\v1;
 
 use App\Services\v1\PatientService;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Mockery\Exception;
 
 class PatientController extends Controller
 {
@@ -29,19 +31,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $data = $this->patients->getPatients();
+        $parameters = request()->input();
+
+        $data = $this->patients->getPatients($parameters);
 
         return response()->json($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,7 +46,12 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $patient = $this->patients->createPatient($request);
+            return response()->json($patient, 201);
+        } catch (Exception $exception) {
+            return response()->json(array('message' => $exception->getMessage(), ''),500);
+        }
     }
 
     /**
@@ -63,18 +62,12 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $parameters = request()->input();
+        $parameters['id'] = $id;
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $data = $this->patients->getPatients($parameters);
+
+        return response()->json($data);
     }
 
     /**
@@ -86,7 +79,14 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $patient = $this->patients->updatePatient($request, $id);
+            return response()->json($patient, 200);
+        } catch (ModelNotFoundException $exception) {
+            throw $exception;
+        } catch (Exception $exception) {
+            return response()->json(array('message' => $exception->getMessage(), ''),500);
+        }
     }
 
     /**
@@ -97,6 +97,13 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $this->patients->deletePatient($id);
+            return response()->make('', 204);
+        } catch (ModelNotFoundException $exception) {
+            throw $exception;
+        } catch (Exception $exception) {
+            return response()->json(array('message' => $exception->getMessage(), ''),500);
+        }
     }
 }

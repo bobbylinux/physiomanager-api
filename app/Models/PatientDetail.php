@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class PatientDetail extends Model
+class PatientDetail extends BaseModel
 {
     /**
-     * Get the patient by detail.
+     * Get the patient basic information.
      */
     public function patient()
     {
-        return $this->belongsTo('App\Models\PatientDetail');
+        return $this->belongsTo('App\Models\Patient');
     }
 }
