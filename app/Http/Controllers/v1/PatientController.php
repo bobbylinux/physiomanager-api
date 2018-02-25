@@ -46,6 +46,8 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        $this->patients->validate($request->all());
+
         try {
             $patient = $this->patients->createPatient($request);
             return response()->json($patient, 201);

@@ -2,9 +2,9 @@
 
 namespace App\Providers\v1;
 
-use App\Models\Patient;
 use App\Services\v1\PatientService;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class PatientServiceProvider extends ServiceProvider
 {
@@ -15,7 +15,9 @@ class PatientServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        validator::extend('patient_sex', function($attribute, $value, $parameters, $validator){
+            return $value == "M" || $value == "F";
+        });
     }
 
     /**

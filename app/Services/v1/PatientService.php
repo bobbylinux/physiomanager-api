@@ -5,7 +5,7 @@ namespace App\Services\v1;
 use App\Models\Patient;
 use App\Models\PatientDetail;
 
-class PatientService
+class PatientService extends BaseService
 {
     private $supportedIncludes = array(
         'lastDetail' => 'detail'
@@ -16,6 +16,16 @@ class PatientService
         'last_name',
         'first_name',
         'sex'
+    );
+    protected $rules = array(
+        'last_name' => 'required|max:255',
+        'first_name' => 'required|max:255',
+        'tax_code' => 'required|size:16',
+        'sex' => 'required|patient_sex',
+        'birthday' => 'required|date|before:tomorrow|after:1900-01-01',
+        'place_of_birth' => 'required|max:255',
+        'detail.phone_number' => 'required|max:255',
+        'detail.email' => 'email|max:255'
     );
 
     public function getPatients($parameters)
@@ -35,6 +45,8 @@ class PatientService
 
     public function createPatient($request)
     {
+        $this->validate($request->all());
+
         $patient = new Patient();
 
         $patient->last_name = $request->input("last_name");
@@ -60,6 +72,8 @@ class PatientService
 
     public function updatePatient($request, $id)
     {
+        $this->validate($request->all());
+
         $patient = Patient::findOrFail($id);
         $patient->last_name = $request->input("last_name");
         $patient->first_name = $request->input("first_name");
