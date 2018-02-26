@@ -7,26 +7,33 @@ use App\Models\PatientDetail;
 
 class PatientService extends BaseService
 {
-    private $supportedIncludes = array(
-        'lastDetail' => 'detail'
-    );
-    private $clauseProperties = array(
-        'id',
-        'tax_code',
-        'last_name',
-        'first_name',
-        'sex'
-    );
-    protected $rules = array(
-        'last_name' => 'required|max:255',
-        'first_name' => 'required|max:255',
-        'tax_code' => 'required|size:16',
-        'sex' => 'required|patient_sex',
-        'birthday' => 'required|date|before:tomorrow|after:1900-01-01',
-        'place_of_birth' => 'required|max:255',
-        'detail.phone_number' => 'required|max:255',
-        'detail.email' => 'email|max:255'
-    );
+    /**
+     * Construct the class and Dependency Injection.
+     *
+     */
+    public function __construct()
+    {
+        $this->supportedIncludes = array(
+            'lastDetail' => 'detail'
+        );
+        $this->clauseProperties = array(
+            'id',
+            'tax_code',
+            'last_name',
+            'first_name',
+            'sex'
+        );
+        $this->rules = array(
+            'last_name' => 'required|max:255',
+            'first_name' => 'required|max:255',
+            'tax_code' => 'required|size:16',
+            'sex' => 'required|patient_sex',
+            'birthday' => 'required|date|before:tomorrow|after:1900-01-01',
+            'place_of_birth' => 'required|max:255',
+            'detail.phone_number' => 'required|max:255',
+            'detail.email' => 'email|max:255'
+        );
+    }
 
     public function getPatients($parameters)
     {
@@ -138,32 +145,5 @@ class PatientService extends BaseService
         }
 
         return $data;
-    }
-
-    private function getWithKeys($parameters)
-    {
-        $withKeys = array();
-
-        if (isset($parameters['include'])) {
-            $includeParams = explode(",", $parameters['include']);
-            $includes = array_intersect($this->supportedIncludes, $includeParams);
-            $withKeys = array_keys($includes);
-        }
-
-        return $withKeys;
-
-    }
-
-    private function getWhereClause($parameters)
-    {
-        $clause = array();
-
-        foreach ($this->clauseProperties as $property) {
-            if (in_array($property, array_keys($parameters))) {
-                $clause[$property] = $parameters[$property];
-            }
-        }
-
-        return $clause;
     }
 }

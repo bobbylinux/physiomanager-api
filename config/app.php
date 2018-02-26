@@ -163,6 +163,7 @@ return [
          * Custom Service Providers...
          * */
         App\Providers\v1\PatientServiceProvider::class,
+        App\Providers\v1\DisciplineServiceProvider::class,
 
     ],
 
