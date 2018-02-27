@@ -21,3 +21,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('v1/patients',v1\PatientController::class, [
     'except' => ['create','edit']
 ]);
+// /api/v1/disciplines
+Route::resource('v1/disciplines',v1\DisciplineController::class, [
+    'except' => ['create','edit']
+]);
+// /api/v1/physiotherapists
+Route::resource('v1/physiotherapists',v1\PhysiotherapistController::class, [
+    'except' => ['create','edit']
+]);

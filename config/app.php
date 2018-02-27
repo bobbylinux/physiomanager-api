@@ -163,6 +163,9 @@ return [
          * Custom Service Providers...
          * */
         App\Providers\v1\PatientServiceProvider::class,
+        App\Providers\v1\DisciplineServiceProvider::class,
+        App\Providers\v1\DoctorServiceProvider::class,
+        App\Providers\v1\PhysiotherapistServiceProvider::class,
 
     ],
 
