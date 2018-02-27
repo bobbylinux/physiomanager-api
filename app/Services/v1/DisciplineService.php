@@ -12,12 +12,14 @@ class DisciplineService extends BaseService
      */
     public function __construct()
     {
+        $this->supportedIncludes = array(
+            'doctors' => 'doctors'
+        );
         $this->clauseProperties = array(
             'id',
             'description',
             'enabled'
         );
-
         $this->rules = array(
             'description' => 'required|max:255',
             'enabled' => 'required|boolean'
@@ -70,7 +72,7 @@ class DisciplineService extends BaseService
         $discipline->delete();
     }
 
-    private function filterDisciplines($disciplines)
+    private function filterDisciplines($disciplines, $keys = array())
     {
         $data = array();
 
@@ -81,23 +83,20 @@ class DisciplineService extends BaseService
                 'enabled' => $discipline->enabled,
                 'href' => route('disciplines.show', ['id' => $discipline->id])
             );
+            if (in_array('doctors', $keys)) {
+                foreach ($discipline->doctors as $doctor) {
+                    $item['doctors'][] = array(
+                        'id' => $doctor->id,
+                        'first_name' => $doctor->first_name,
+                        'last_name' => $doctor->last_name,
+                        'enabled' => $doctor->enabled
+                    );
+                }
+
+            }
             $data[] = $item;
         }
 
         return $data;
-    }
-
-    private function getWithKeys($parameters)
-    {
-        $withKeys = array();
-
-        if (isset($parameters['include'])) {
-            $includeParams = explode(",", $parameters['include']);
-            $includes = array_intersect($this->supportedIncludes, $includeParams);
-            $withKeys = array_keys($includes);
-        }
-
-        return $withKeys;
-
     }
 }

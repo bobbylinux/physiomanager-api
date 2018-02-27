@@ -19,8 +19,8 @@ class DoctorService extends BaseService
             'id',
             'last_name',
             'first_name',
-            'discipline',
-            'enabled'
+            'enabled',
+            'discipline_id'
         );
         $this->rules = array(
             'first_name' => 'required|max:255',
@@ -36,7 +36,7 @@ class DoctorService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $doctors = doctor::with($withKeys)->where($whereClauses)->get();
+            $doctors = Doctor::with($withKeys)->where($whereClauses)->get();
             $doctors = $this->filterDoctors($doctors, $withKeys);
         }
 
@@ -49,7 +49,9 @@ class DoctorService extends BaseService
 
         $doctor = new doctor();
 
-        $doctor->description = $request->input("description");
+        $doctor->first_name = $request->input("first_name");
+        $doctor->last_name = $request->input("last_name");
+        $doctor->discipline_id = $request->input("discipline_id");
         $doctor->enabled = $request->input("enabled");
         $doctor->save();
 
@@ -60,8 +62,10 @@ class DoctorService extends BaseService
     {
         $this->validate($request->all());
 
-        $doctor = doctor::findOrFail($id);
-        $doctor->description = $request->input("description");
+        $doctor = Doctor::findOrFail($id);
+        $doctor->first_name = $request->input("first_name");
+        $doctor->last_name = $request->input("last_name");
+        $doctor->discipline_id = $request->input("discipline_id");
         $doctor->enabled = $request->input("enabled");
 
         $doctor->save();
@@ -75,7 +79,7 @@ class DoctorService extends BaseService
         $doctor->delete();
     }
 
-    private function filterDoctors($doctors)
+    private function filterDoctors($doctors, $keys = array())
     {
         $data = array();
 
@@ -87,11 +91,16 @@ class DoctorService extends BaseService
                 'enabled' => $doctor->enabled,
                 'href' => route('doctors.show', ['id' => $doctor->id])
             );
+            if (in_array('discipline', $keys)) {
+                $item['discipline'] = array(
+                    'id' => $doctor->discipline->id,
+                    'description' => $doctor->discipline->description,
+                    'enabled' => $doctor->discipline->enabled
+                );
+            }
             $data[] = $item;
         }
 
         return $data;
     }
-
-
 }
