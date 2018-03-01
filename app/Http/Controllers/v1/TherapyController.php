@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers\v1;
 
-use App\Services\v1\PhysiotherapistService;
+use App\Services\v1\TherapyService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class PhysiotherapistController extends Controller
+class TherapyController extends Controller
 {
     /**
      * Private actributes
      */
-    private $physiotherapists;
+    private $therapies;
 
     /**
      * Construct the class and Dependency Injection.
      *
      */
-    public function __construct(PhysiotherapistService $physiotherapist)
+    public function __construct(TherapyService $therapies)
     {
-        $this->physiotherapists = $physiotherapist;
+        $this->therapies = $therapies;
     }
 
     /**
@@ -31,7 +31,7 @@ class PhysiotherapistController extends Controller
     {
         $parameters = request()->input();
 
-        $data = $this->physiotherapists->getPhysiotherapists($parameters);
+        $data = $this->therapies->getTherapies($parameters);
 
         return response()->json($data);
     }
@@ -45,8 +45,8 @@ class PhysiotherapistController extends Controller
     public function store(Request $request)
     {
         try {
-            $physiotherapist = $this->physiotherapists->createPhysiotherapist($request);
-            return response()->json($physiotherapist, 201);
+            $therapy = $this->therapies->createTherapy($request);
+            return response()->json($therapy, 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -63,7 +63,7 @@ class PhysiotherapistController extends Controller
         $parameters = request()->input();
         $parameters['id'] = $id;
 
-        $data = $this->physiotherapists->getPhysiotherapists($parameters);
+        $data = $this->therapies->getTherapies($parameters);
 
         return response()->json($data);
     }
@@ -78,8 +78,8 @@ class PhysiotherapistController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $physiotherapist = $this->physiotherapists->updatePhysiotherapist($request, $id);
-            return response()->json($physiotherapist, 200);
+            $therapy = $this->therapies->updateTherapy($request, $id);
+            return response()->json($therapy, 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {
@@ -96,7 +96,7 @@ class PhysiotherapistController extends Controller
     public function destroy($id)
     {
         try {
-            $this->physiotherapists->deletePhysiotherapist($id);
+            $this->therapies->deleteTherapy($id);
             return response()->make('', 204);
         } catch (ModelNotFoundException $exception) {
             throw $exception;

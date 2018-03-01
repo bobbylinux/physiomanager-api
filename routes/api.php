@@ -29,3 +29,7 @@ Route::resource('v1/disciplines',v1\DisciplineController::class, [
 Route::resource('v1/physiotherapists',v1\PhysiotherapistController::class, [
     'except' => ['create','edit']
 ]);
+// /api/v1/therapies
+Route::resource('v1/therapies',v1\TherapyController::class, [
+    'except' => ['create','edit']
+]);

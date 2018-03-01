@@ -7,7 +7,7 @@ use App\Models\Doctor;
 class DoctorService extends BaseService
 {
     /**
-     * Construct the class and Dependency Injection.
+     * Construct the class.
      *
      */
     public function __construct()

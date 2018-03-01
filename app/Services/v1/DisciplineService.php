@@ -7,7 +7,7 @@ use App\Models\Discipline;
 class DisciplineService extends BaseService
 {
     /**
-     * Construct the class and Dependency Injection.
+     * Construct the class.
      *
      */
     public function __construct()
