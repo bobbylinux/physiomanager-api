@@ -15,11 +15,13 @@ class TherapyService extends BaseService
         $this->clauseProperties = array(
             'id',
             'description',
-            'enabled'
+            'enabled',
+            'price'
         );
         $this->rules = array(
             'description' => 'required|max:255',
-            'enabled' => 'required|boolean'
+            'enabled' => 'required|boolean',
+            'price' => 'required|decimal|min:0'
         );
     }
 

@@ -33,3 +33,7 @@ Route::resource('v1/physiotherapists',v1\PhysiotherapistController::class, [
 Route::resource('v1/therapies',v1\TherapyController::class, [
     'except' => ['create','edit']
 ]);
+// /api/v1/programs
+Route::resource('v1/programs',v1\ProgramController::class, [
+    'except' => ['create','edit']
+]);
