@@ -16,7 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 // /api/v1/patients
 Route::resource('v1/patients',v1\PatientController::class, [
     'except' => ['create','edit']
@@ -35,5 +34,21 @@ Route::resource('v1/therapies',v1\TherapyController::class, [
 ]);
 // /api/v1/programs
 Route::resource('v1/programs',v1\ProgramController::class, [
+    'except' => ['create','edit']
+]);
+// /api/v1/work_results
+Route::resource('v1/work_results',v1\WorkResultController::class, [
+    'except' => ['create','edit']
+]);
+// /api/v1/pains
+Route::resource('v1/pains',v1\PainController::class, [
+    'except' => ['create','edit']
+]);
+// /api/v1/mobilities
+Route::resource('v1/mobilities',v1\MobilityController::class, [
+    'except' => ['create','edit']
+]);
+// /api/v1/plans
+Route::resource('v1/plans',v1\PlanController::class, [
     'except' => ['create','edit']
 ]);
