@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Providers\v1;
 
+use App\Services\v1\SessionService;
 use Illuminate\Support\ServiceProvider;
 
 class SessionServiceProvider extends ServiceProvider
@@ -23,6 +23,8 @@ class SessionServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(SessionService::class, function ($app) {
+            return new SessionService();
+        });
     }
 }

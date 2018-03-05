@@ -171,6 +171,7 @@ return [
         App\Providers\v1\PainServiceProvider::class,
         App\Providers\v1\MobilityServiceProvider::class,
         App\Providers\v1\PlanServiceProvider::class,
+        App\Providers\v1\SessionServiceProvider::class,
 
     ],
 

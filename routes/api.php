@@ -52,3 +52,7 @@ Route::resource('v1/mobilities',v1\MobilityController::class, [
 Route::resource('v1/plans',v1\PlanController::class, [
     'except' => ['create','edit']
 ]);
+// /api/v1/sessions
+Route::resource('v1/sessions',v1\SessionController::class, [
+    'except' => ['create','edit']
+]);
