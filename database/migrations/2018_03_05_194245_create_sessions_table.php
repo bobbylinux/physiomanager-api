@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePathologicalConditionsTable extends Migration
+class CreateSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreatePathologicalConditionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pathological_conditions', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description');
-            $table->morphs('author');
+            $table->integer('plan_id');
+            $table->integer('units')->default(1);
+            $table->longText('note')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+            /*foreign keys*/
+            $table->foreign('plan_id')->references('id')->on('plans');
         });
     }
 
@@ -28,6 +32,6 @@ class CreatePathologicalConditionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pathological_conditions');
+        Schema::dropIfExists('sessions');
     }
 }

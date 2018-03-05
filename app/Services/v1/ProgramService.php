@@ -77,8 +77,7 @@ class ProgramService extends BaseService
                 'id' => $program->id,
                 'description' => $program->description,
                 'enabled' => $program->enabled,
-                'price' => $program->price,
-                'href' => route('therapies.show', ['id' => $program->id])
+                'href' => route('programs.show', ['id' => $program->id])
             );
             $data[] = $item;
         }
