@@ -35,7 +35,7 @@ class PatientController extends Controller
 
         $data = $this->patients->getPatients($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
