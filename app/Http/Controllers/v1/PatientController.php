@@ -48,7 +48,7 @@ class PatientController extends Controller
     {
         try {
             $patient = $this->patients->createPatient($request);
-            return response()->json($patient, 201);
+            return response()->json(['data' => $patient], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -67,7 +67,7 @@ class PatientController extends Controller
 
         $data = $this->patients->getPatients($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -81,7 +81,7 @@ class PatientController extends Controller
     {
         try {
             $patient = $this->patients->updatePatient($request, $id);
-            return response()->json($patient, 200);
+            return response()->json(['data' => $patient], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

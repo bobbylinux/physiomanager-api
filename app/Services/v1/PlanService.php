@@ -14,9 +14,7 @@ class PlanService extends BaseService
     {
         $this->clauseProperties = array(
             'id',
-            'description',
-            'enabled',
-            'price'
+            'patient_id'
         );
         $this->rules = array(
             'description' => 'required|max:255',
@@ -80,9 +78,12 @@ class PlanService extends BaseService
         foreach ($plans as $plan) {
             $item = array(
                 'id' => $plan->id,
-                'description' => $plan->description,
-                'enabled' => $plan->enabled,
-                'price' => $plan->price,
+                'patient_id' => $plan->patient_id,
+                'pathological_conditions' => $plan->pathological_conditions,
+                'note' => $plan->note,
+                'final_report' => $plan->final_report,
+                'privacy' => $plan->privacy,
+                'medical_certificate' => $plan->medical_certificate,
                 'href' => route('plans.show', ['id' => $plan->id])
             );
             $data[] = $item;
