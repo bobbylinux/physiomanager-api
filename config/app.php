@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'CET',
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'it',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +159,19 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        /*
+         * Custom Service Providers...
+         * */
+        App\Providers\v1\PatientServiceProvider::class,
+        App\Providers\v1\DisciplineServiceProvider::class,
+        App\Providers\v1\DoctorServiceProvider::class,
+        App\Providers\v1\PhysiotherapistServiceProvider::class,
+        App\Providers\v1\TherapyServiceProvider::class,
+        App\Providers\v1\WorkResultServiceProvider::class,
+        App\Providers\v1\PainServiceProvider::class,
+        App\Providers\v1\MobilityServiceProvider::class,
+        App\Providers\v1\PlanServiceProvider::class,
+        App\Providers\v1\SessionServiceProvider::class,
 
     ],
 
