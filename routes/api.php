@@ -24,6 +24,10 @@ Route::resource('v1/patients',v1\PatientController::class, [
 Route::resource('v1/disciplines',v1\DisciplineController::class, [
     'except' => ['create','edit']
 ]);
+// /api/v1/doctors
+Route::resource('v1/doctors',v1\DoctorController::class, [
+    'except' => ['create','edit']
+]);
 // /api/v1/physiotherapists
 Route::resource('v1/physiotherapists',v1\PhysiotherapistController::class, [
     'except' => ['create','edit']

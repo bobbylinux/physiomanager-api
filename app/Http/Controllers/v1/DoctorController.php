@@ -32,7 +32,7 @@ class DoctorController extends Controller
 
         $data = $this->doctors->getDoctors($parameters);
 
-        return response()->json($data);
+        return response()->json(array('data' => $data));
     }
 
     /**

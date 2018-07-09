@@ -93,9 +93,9 @@ class DoctorService extends BaseService
             );
             if (in_array('discipline', $keys)) {
                 $item['discipline'] = array(
-                    'id' => $doctor->discipline->id,
-                    'description' => $doctor->discipline->description,
-                    'enabled' => $doctor->discipline->enabled
+                    'id' => $doctor->discipline['id'],
+                    'description' => $doctor->discipline['description'],
+                    'enabled' => $doctor->discipline['enabled']
                 );
             }
             $data[] = $item;
