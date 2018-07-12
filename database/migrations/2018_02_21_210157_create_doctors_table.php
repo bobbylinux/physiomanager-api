@@ -20,6 +20,7 @@ class CreateDoctorsTable extends Migration
             $table->integer('discipline_id');
             $table->boolean('enabled')->default(true);
             $table->timestamps();
+            $table->softDeletes();
             /*foreign keys*/
             $table->foreign('discipline_id')->references('id')->on('disciplines');
         });

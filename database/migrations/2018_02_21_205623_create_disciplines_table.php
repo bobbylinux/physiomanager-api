@@ -18,6 +18,7 @@ class CreateDisciplinesTable extends Migration
             $table->string('description', 255);
             $table->boolean('enabled')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

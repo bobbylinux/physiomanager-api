@@ -21,6 +21,7 @@ class CreatePatientDetailsTable extends Migration
             $table->string('phone_number', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
             /*foreign keys*/
             $table->foreign('patient_id')->references('id')->on('patients');
         });

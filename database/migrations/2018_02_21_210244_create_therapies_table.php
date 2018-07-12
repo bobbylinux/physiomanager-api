@@ -17,7 +17,9 @@ class CreateTherapiesTable extends Migration
             $table->increments('id');
             $table->string('description', 255);
             $table->boolean('enabled')->default(true);
+            $table->decimal('price', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
