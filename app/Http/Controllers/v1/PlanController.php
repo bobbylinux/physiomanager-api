@@ -30,10 +30,8 @@ class PlanController extends Controller
     public function index()
     {
         $parameters = request()->input();
-
         $data = $this->plans->getPlans($parameters);
-
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +44,7 @@ class PlanController extends Controller
     {
         try {
             $plan = $this->plans->createPlan($request);
-            return response()->json($plan, 201);
+            return response()->json(['data' => $plan], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -79,7 +77,7 @@ class PlanController extends Controller
     {
         try {
             $plan = $this->plans->updatePlan($request, $id);
-            return response()->json($plan, 200);
+            return response()->json(['data' => $plan], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

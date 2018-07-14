@@ -32,7 +32,7 @@ class WorkResultController extends Controller
 
         $data = $this->workResults->getWorkResults($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**

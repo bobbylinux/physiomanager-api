@@ -19,7 +19,8 @@ class PlanService extends BaseService
         $this->rules = array(
             'description' => 'required|max:255',
             'enabled' => 'required|boolean',
-            'price' => 'required|decimal|min:0'
+            'price' => 'required|decimal|min:0',
+            'patient_id' => 'required'
         );
     }
 
