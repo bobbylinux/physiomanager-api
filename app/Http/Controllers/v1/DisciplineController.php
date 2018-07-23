@@ -33,7 +33,7 @@ class DisciplineController extends Controller
 
         $data = $this->disciplines->getDisciplines($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +46,7 @@ class DisciplineController extends Controller
     {
         try {
             $discipline = $this->disciplines->createDiscipline($request);
-            return response()->json($discipline, 201);
+            return response()->json(['data' => $discipline], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -65,7 +65,7 @@ class DisciplineController extends Controller
 
         $data = $this->disciplines->getDisciplines($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -79,7 +79,7 @@ class DisciplineController extends Controller
     {
         try {
             $discipline = $this->disciplines->updateDiscipline($request, $id);
-            return response()->json($discipline, 200);
+            return response()->json(['data' => $discipline], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

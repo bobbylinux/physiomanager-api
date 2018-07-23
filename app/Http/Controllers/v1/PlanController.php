@@ -63,7 +63,7 @@ class PlanController extends Controller
 
         $data = $this->plans->getPlans($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
