@@ -88,6 +88,7 @@ class DoctorService extends BaseService
                 'id' => $doctor->id,
                 'last_name' => $doctor->last_name,
                 'first_name' => $doctor->first_name,
+                'discipline_id' => $doctor->discipline_id,
                 'enabled' => $doctor->enabled,
                 'href' => route('doctors.show', ['id' => $doctor->id])
             );
