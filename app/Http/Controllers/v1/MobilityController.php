@@ -65,7 +65,7 @@ class MobilityController extends Controller
 
         $data = $this->mobilities->getMobilities($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
