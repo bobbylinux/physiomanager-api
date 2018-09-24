@@ -133,7 +133,7 @@ class PatientService extends BaseService
                     $item['detail'] = array(
                         'address' => $patient->lastDetail->address,
                         'city' => $patient->lastDetail->city,
-                        'phone' => $patient->lastDetail->phone_number,
+                        'phone_number' => $patient->lastDetail->phone_number,
                         'email' => $patient->lastDetail->email
                     );
                 } else {

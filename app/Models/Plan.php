@@ -9,27 +9,34 @@ class Plan extends BaseModel
      */
     public function patient()
     {
-        return $this->hasOne('App\Models\Patient');
+        return $this->belongsTo('App\Models\Patient');
     }
     /**
      * Get the plan work result.
      */
     public function work_result()
     {
-        return $this->hasOne('App\Models\WorkResult');
+        return $this->belongsTo('App\Models\WorkResult');
     }
     /**
      * Get the plan pain
      */
     public function pain()
     {
-        return $this->hasOne('App\Models\Pain');
+        return $this->belongsTo('App\Models\Pain');
     }
     /**
      * Get the plan mobility
      */
     public function mobility()
     {
-        return $this->hasOne('App\Models\Mobility');
+        return $this->belongsTo('App\Models\Mobility');
+    }
+    /**
+     * Get the plan sessions.
+     */
+    public function sessions()
+    {
+        return $this->hasMany('App\Models\Session');
     }
 }
