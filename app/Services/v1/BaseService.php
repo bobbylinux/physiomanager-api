@@ -14,13 +14,17 @@ abstract class BaseService
         $validator->validate();
     }
 
-    protected function getWhereClause($parameters)
+    protected function getWhereClause($parameters, $like = FALSE)
     {
         $clause = array();
 
         foreach ($this->clauseProperties as $property) {
             if (in_array($property, array_keys($parameters))) {
-                $clause[$property] = $parameters[$property];
+                if ($like) {//ricerca aperta
+                    $clause[] = [$property, 'ilike', '%' . strtolower($parameters[$property]). '%'];
+                } else {//ricerca puntuale
+                    $clause[$property] = $parameters[$property];
+                }
             }
         }
 
