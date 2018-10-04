@@ -80,6 +80,7 @@ return [
 
     'locale' => 'it',
 
+    'faker_locale' => 'it_IT',
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

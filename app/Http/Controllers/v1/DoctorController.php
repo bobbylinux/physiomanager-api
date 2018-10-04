@@ -45,7 +45,7 @@ class DoctorController extends Controller
     {
         try {
             $doctor = $this->doctors->createDoctor($request);
-            return response()->json($doctor, 201);
+            return response()->json(['data' => $doctor], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -64,7 +64,7 @@ class DoctorController extends Controller
 
         $data = $this->doctors->getDoctors($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -78,7 +78,7 @@ class DoctorController extends Controller
     {
         try {
             $doctor = $this->doctors->updateDoctor($request, $id);
-            return response()->json($doctor, 200);
+            return response()->json(['data' => $doctor], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

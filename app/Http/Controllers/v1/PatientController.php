@@ -32,9 +32,7 @@ class PatientController extends Controller
     public function index()
     {
         $parameters = request()->input();
-
         $data = $this->patients->getPatients($parameters);
-
         return response()->json(['data' => $data]);
     }
 

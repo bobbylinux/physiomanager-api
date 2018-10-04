@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdatePathologicalConditions extends Migration
+class CreatePhysiotherapistsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,12 @@ class UpdatePathologicalConditions extends Migration
      */
     public function up()
     {
-        Schema::table('pathological_conditions', function (Blueprint $table) {
+        Schema::create('physiotherapists', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('last_name', 255);
+            $table->string('first_name', 255);
+            $table->boolean('enabled')->default(true);
+            $table->timestamps();
             $table->softDeletes();
         });
     }
@@ -25,8 +30,6 @@ class UpdatePathologicalConditions extends Migration
      */
     public function down()
     {
-        Schema::table('pathological_conditions', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('physiotherapists');
     }
 }

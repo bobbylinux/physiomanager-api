@@ -28,8 +28,8 @@ class PatientService extends BaseService
             'first_name' => 'required|max:255',
             'tax_code' => 'required|size:16',
             'sex' => 'required|patient_sex',
-            'birthday' => 'required|date|before:tomorrow|after:1900-01-01',
-            'place_of_birth' => 'required|max:255',
+            'birthday' => 'date|before:tomorrow|after:1900-01-01',
+            'place_of_birth' => 'max:255',
             'detail.phone_number' => 'required|max:255',
             'detail.email' => 'email|max:255'
         );
@@ -41,7 +41,7 @@ class PatientService extends BaseService
             $patients = $this->filterPatients(Patient::all());
         } else {
             $withKeys = $this->getWithKeys($parameters);
-            $whereClauses = $this->getWhereClause($parameters);
+            $whereClauses = $this->getWhereClause($parameters, TRUE);
             $patients = Patient::with($withKeys)->where($whereClauses)->get();
             $patients = $this->filterPatients($patients, $withKeys);
         }
@@ -133,7 +133,7 @@ class PatientService extends BaseService
                     $item['detail'] = array(
                         'address' => $patient->lastDetail->address,
                         'city' => $patient->lastDetail->city,
-                        'phone' => $patient->lastDetail->phone_number,
+                        'phone_number' => $patient->lastDetail->phone_number,
                         'email' => $patient->lastDetail->email
                     );
                 } else {

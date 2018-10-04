@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->integer('patient_id');
             $table->longText('pathological_conditions')->nullable();
             $table->longText('note')->nullable();
+            $table->longText('program')->nullable();
             $table->longText('final_report')->nullable();
             $table->boolean('privacy')->nullable();
             $table->boolean('medical_certificate')->nullable();

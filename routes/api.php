@@ -20,10 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('v1/patients',v1\PatientController::class, [
     'except' => ['create','edit']
 ]);
-// /api/v1/disciplines
-Route::resource('v1/disciplines',v1\DisciplineController::class, [
-    'except' => ['create','edit']
-]);
 // /api/v1/doctors
 Route::resource('v1/doctors',v1\DoctorController::class, [
     'except' => ['create','edit']

@@ -21,7 +21,7 @@ class TherapyService extends BaseService
         $this->rules = array(
             'description' => 'required|max:255',
             'enabled' => 'required|boolean',
-            'price' => 'required|decimal|min:0'
+            'price' => 'required|numeric|min:0'
         );
     }
 

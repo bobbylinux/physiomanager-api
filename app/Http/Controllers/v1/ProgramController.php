@@ -34,7 +34,7 @@ class ProgramController extends Controller
 
         $data = $this->programs->getPrograms($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProgramController extends Controller
     {
         try {
             $program = $this->programs->createProgram($request);
-            return response()->json($program, 201);
+            return response()->json(['data' => $program], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -66,7 +66,7 @@ class ProgramController extends Controller
 
         $data = $this->programs->getPrograms($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -80,7 +80,7 @@ class ProgramController extends Controller
     {
         try {
             $program = $this->programs->updateProgram($request, $id);
-            return response()->json($program, 200);
+            return response()->json(['data' => $program], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

@@ -12,15 +12,11 @@ class DoctorService extends BaseService
      */
     public function __construct()
     {
-        $this->supportedIncludes = array(
-            'discipline' => 'discipline'
-        );
         $this->clauseProperties = array(
             'id',
             'last_name',
             'first_name',
-            'enabled',
-            'discipline_id'
+            'enabled'
         );
         $this->rules = array(
             'first_name' => 'required|max:255',
@@ -65,7 +61,6 @@ class DoctorService extends BaseService
         $doctor = Doctor::findOrFail($id);
         $doctor->first_name = $request->input("first_name");
         $doctor->last_name = $request->input("last_name");
-        $doctor->discipline_id = $request->input("discipline_id");
         $doctor->enabled = $request->input("enabled");
 
         $doctor->save();

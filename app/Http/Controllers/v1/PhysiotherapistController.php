@@ -33,7 +33,7 @@ class PhysiotherapistController extends Controller
 
         $data = $this->physiotherapists->getPhysiotherapists($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +46,7 @@ class PhysiotherapistController extends Controller
     {
         try {
             $physiotherapist = $this->physiotherapists->createPhysiotherapist($request);
-            return response()->json($physiotherapist, 201);
+            return response()->json(['data' => $physiotherapist], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -65,7 +65,7 @@ class PhysiotherapistController extends Controller
 
         $data = $this->physiotherapists->getPhysiotherapists($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -79,7 +79,7 @@ class PhysiotherapistController extends Controller
     {
         try {
             $physiotherapist = $this->physiotherapists->updatePhysiotherapist($request, $id);
-            return response()->json($physiotherapist, 200);
+            return response()->json(['data' => $physiotherapist], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

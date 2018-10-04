@@ -33,7 +33,7 @@ class TherapyController extends Controller
 
         $data = $this->therapies->getTherapies($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +46,7 @@ class TherapyController extends Controller
     {
         try {
             $therapy = $this->therapies->createTherapy($request);
-            return response()->json($therapy, 201);
+            return response()->json(['data' => $therapy], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -65,7 +65,7 @@ class TherapyController extends Controller
 
         $data = $this->therapies->getTherapies($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -79,7 +79,7 @@ class TherapyController extends Controller
     {
         try {
             $therapy = $this->therapies->updateTherapy($request, $id);
-            return response()->json($therapy, 200);
+            return response()->json(['data' => $therapy], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

@@ -33,7 +33,7 @@ class PainController extends Controller
 
         $data = $this->pains->getPains($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +46,7 @@ class PainController extends Controller
     {
         try {
             $pain = $this->pains->createPain($request);
-            return response()->json($pain, 201);
+            return response()->json(['data' => $pain], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -65,7 +65,7 @@ class PainController extends Controller
 
         $data = $this->pains->getPains($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -79,7 +79,7 @@ class PainController extends Controller
     {
         try {
             $pain = $this->pains->updatePain($request, $id);
-            return response()->json($pain, 200);
+            return response()->json(['data' => $pain], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

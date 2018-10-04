@@ -14,12 +14,19 @@ class SessionService extends BaseService
     {
         $this->clauseProperties = array(
             'id',
-            'description',
-            'enabled'
+            'therapy_id',
+            'physiotherapist_id',
+            'price',
+            'units',
+            'note',
+            'date'
         );
         $this->rules = array(
-            'description' => 'required|max:255',
-            'enabled' => 'required|boolean'
+            'therapy_id' => 'required',
+            'physiotherapist_id' => 'required',
+            'price' => 'required|numeric',
+            'units' => 'required|numeric',
+            'plan_id' => 'required|integer'
         );
     }
 
@@ -43,9 +50,13 @@ class SessionService extends BaseService
 
         $session = new Session();
 
-        $session->description = $request->input("description");
-        $session->enabled = $request->input("enabled");
+        $session->date = $request->input("date");
+        $session->therapy_id = $request->input("therapy_id");
+        $session->physiotherapist_id = $request->input("physiotherapist_id");
         $session->price = $request->input("price");
+        $session->units = $request->input("units");
+        $session->note = $request->input("note");
+        $session->plan_id = $request->input("plan_id");
         $session->save();
 
         return $this->filterSessions(array($session));
@@ -56,9 +67,13 @@ class SessionService extends BaseService
         $this->validate($request->all());
 
         $session = Session::findOrFail($id);
-        $session->description = $request->input("description");
-        $session->enabled = $request->input("enabled");
+        $session->date = $request->input("date");
+        $session->therapy_id = $request->input("therapy_id");
+        $session->physiotherapist_id = $request->input("physiotherapist_id");
         $session->price = $request->input("price");
+        $session->units = $request->input("units");
+        $session->note = $request->input("note");
+        $session->plan_id = $request->input("plan_id");
 
         $session->save();
 
@@ -78,8 +93,10 @@ class SessionService extends BaseService
         foreach ($sessions as $session) {
             $item = array(
                 'id' => $session->id,
-                'description' => $session->description,
-                'enabled' => $session->enabled,
+                'therapy_id' => $session->therapy_id,
+                'physiotherapist_id' => $session->physiotherapist_id,
+                'date' => $session->date,
+                'units' => $session->units,
                 'price' => $session->price,
                 'href' => route('sessions.show', ['id' => $session->id])
             );

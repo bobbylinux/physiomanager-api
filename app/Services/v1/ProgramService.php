@@ -13,11 +13,12 @@ class ProgramService extends BaseService
     {
         $this->clauseProperties = array(
             'id',
+            'title',
             'description',
             'enabled'
         );
         $this->rules = array(
-            'description' => 'required|max:255',
+            'description' => 'required|max:4000',
             'enabled' => 'required|boolean'
         );
     }
@@ -42,6 +43,7 @@ class ProgramService extends BaseService
 
         $program = new Program();
 
+        $program->title = $request->input("title");
         $program->description = $request->input("description");
         $program->enabled = $request->input("enabled");
         $program->save();
@@ -54,6 +56,7 @@ class ProgramService extends BaseService
         $this->validate($request->all());
 
         $program = Program::findOrFail($id);
+        $program->title = $request->input("title");
         $program->description = $request->input("description");
         $program->enabled = $request->input("enabled");
 
@@ -75,6 +78,7 @@ class ProgramService extends BaseService
         foreach ($programs as $program) {
             $item = array(
                 'id' => $program->id,
+                'title' => $program->title,
                 'description' => $program->description,
                 'enabled' => $program->enabled,
                 'href' => route('programs.show', ['id' => $program->id])

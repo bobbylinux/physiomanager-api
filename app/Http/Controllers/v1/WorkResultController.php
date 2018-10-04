@@ -32,7 +32,7 @@ class WorkResultController extends Controller
 
         $data = $this->workResults->getWorkResults($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -45,7 +45,7 @@ class WorkResultController extends Controller
     {
         try {
             $workResult = $this->workResults->createWorkResult($request);
-            return response()->json($workResult, 201);
+            return response()->json(['data' => $workResult], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -64,7 +64,7 @@ class WorkResultController extends Controller
 
         $data = $this->workResults->getWorkResults($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -78,7 +78,7 @@ class WorkResultController extends Controller
     {
         try {
             $workResult = $this->workResults->updateWorkResult($request, $id);
-            return response()->json($workResult, 200);
+            return response()->json(['data' => $workResult], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {

@@ -16,13 +16,16 @@ class CreatePatientDetailsTable extends Migration
         Schema::create('patient_details', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('patient_id');
+            $table->integer('doctor_id');
             $table->string('address', 255);
             $table->string('city',255);
             $table->string('phone_number', 255)->nullable();
             $table->string('email', 255)->nullable();
             $table->timestamps();
+            $table->softDeletes();
             /*foreign keys*/
             $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('doctor_id')->references('id')->on('doctors');
         });
     }
 

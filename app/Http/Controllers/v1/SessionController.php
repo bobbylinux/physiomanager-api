@@ -33,7 +33,7 @@ class SessionController extends Controller
 
         $data = $this->sessions->getSessions($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -46,7 +46,7 @@ class SessionController extends Controller
     {
         try {
             $session = $this->sessions->createSession($request);
-            return response()->json($session, 201);
+            return response()->json(['data' => $session], 201);
         } catch (Exception $exception) {
             return response()->json(array('message' => $exception->getMessage(), ''),500);
         }
@@ -65,7 +65,7 @@ class SessionController extends Controller
 
         $data = $this->sessions->getSessions($parameters);
 
-        return response()->json($data);
+        return response()->json(['data' => $data]);
     }
 
     /**
@@ -79,7 +79,7 @@ class SessionController extends Controller
     {
         try {
             $session = $this->sessions->updateSession($request, $id);
-            return response()->json($session, 200);
+            return response()->json(['data' => $session], 200);
         } catch (ModelNotFoundException $exception) {
             throw $exception;
         } catch (Exception $exception) {
