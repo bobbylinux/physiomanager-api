@@ -47,7 +47,6 @@ class DoctorService extends BaseService
 
         $doctor->first_name = $request->input("first_name");
         $doctor->last_name = $request->input("last_name");
-        $doctor->discipline_id = $request->input("discipline_id");
         $doctor->enabled = $request->input("enabled");
         $doctor->save();
 
@@ -86,13 +85,6 @@ class DoctorService extends BaseService
                 'enabled' => $doctor->enabled,
                 'href' => route('doctors.show', ['id' => $doctor->id])
             );
-            if (in_array('discipline', $keys)) {
-                $item['discipline'] = array(
-                    'id' => $doctor->discipline['id'],
-                    'description' => $doctor->discipline['description'],
-                    'enabled' => $doctor->discipline['enabled']
-                );
-            }
             $data[] = $item;
         }
 

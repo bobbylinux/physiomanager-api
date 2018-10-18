@@ -21,7 +21,11 @@ abstract class BaseService
         foreach ($this->clauseProperties as $property) {
             if (in_array($property, array_keys($parameters))) {
                 if ($like) {//ricerca aperta
-                    $clause[] = [$property, 'ilike', '%' . strtolower($parameters[$property]). '%'];
+                    if ($property == "id") {
+                        $clause[$property] = $parameters[$property];
+                    } else {
+                        $clause[] = [$property, 'ilike', '%' . strtolower($parameters[$property]). '%'];
+                    }
                 } else {//ricerca puntuale
                     $clause[$property] = $parameters[$property];
                 }

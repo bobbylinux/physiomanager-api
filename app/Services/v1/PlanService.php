@@ -37,7 +37,7 @@ class PlanService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $plans = Plan::with($withKeys)->where($whereClauses)->get();
+            $plans = Plan::with($withKeys)->where($whereClauses)->orderBy('id','desc')->get();
             $plans = $this->filterPlans($plans, $withKeys);
         }
 
@@ -54,6 +54,7 @@ class PlanService extends BaseService
         $plan->pathological_conditions = $request->input("pathological_conditions");
         $plan->note = $request->input("note");
         $plan->final_report = $request->input("final_report");
+        $plan->program = $request->input("program");
         $plan->privacy = $request->input("privacy");
         $plan->medical_certificate = $request->input("medical_certificate");
         $plan->work_result_id = $request->input("work_result_id");
@@ -72,6 +73,7 @@ class PlanService extends BaseService
         $plan->pathological_conditions = $request->input("pathological_conditions");
         $plan->note = $request->input("note");
         $plan->final_report = $request->input("final_report");
+        $plan->program = $request->input("program");
         $plan->privacy = $request->input("privacy");
         $plan->medical_certificate = $request->input("medical_certificate");
         $plan->work_result_id = $request->input("work_result_id");

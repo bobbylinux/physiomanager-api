@@ -14,7 +14,8 @@ class PatientService extends BaseService
     public function __construct()
     {
         $this->supportedIncludes = array(
-            'lastDetail' => 'detail'
+            'lastDetail' => 'detail',
+            'plans' => 'plans'
         );
         $this->clauseProperties = array(
             'id',

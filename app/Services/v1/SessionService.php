@@ -19,7 +19,8 @@ class SessionService extends BaseService
             'price',
             'units',
             'note',
-            'date'
+            'date',
+            'plan_id'
         );
         $this->rules = array(
             'therapy_id' => 'required',

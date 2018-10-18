@@ -19,4 +19,9 @@ class Patient extends BaseModel
     {
         return $this->hasOne('App\Models\PatientDetail')->orderBy('id','desc');
     }
+
+    public function plans()
+    {
+        return $this->hasMany('App\Models\Plan');
+    }
 }
