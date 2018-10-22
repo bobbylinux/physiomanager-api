@@ -15,10 +15,12 @@ class WorkResultService extends BaseService
         $this->clauseProperties = array(
             'id',
             'description',
+            'index',
             'enabled'
         );
         $this->rules = array(
             'description' => 'required|max:255',
+            'index' => 'required|integer',
             'enabled' => 'required|boolean'
         );
     }
@@ -30,7 +32,7 @@ class WorkResultService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $workResults = WorkResult::with($withKeys)->where($whereClauses)->get();
+            $workResults = WorkResult::with($withKeys)->where($whereClauses)->orderBy('index')->get();
             $workResults = $this->filterWorkResults($workResults, $withKeys);
         }
 
@@ -44,6 +46,7 @@ class WorkResultService extends BaseService
         $workResult = new WorkResult();
 
         $workResult->description = $request->input("description");
+        $workResult->index = $request->input("index");
         $workResult->enabled = $request->input("enabled");
         $workResult->save();
 
@@ -56,6 +59,7 @@ class WorkResultService extends BaseService
 
         $workResult = WorkResult::findOrFail($id);
         $workResult->description = $request->input("description");
+        $workResult->index = $request->input("index");
         $workResult->enabled = $request->input("enabled");
 
         $workResult->save();
@@ -78,6 +82,7 @@ class WorkResultService extends BaseService
                 'id' => $workResult->id,
                 'description' => $workResult->description,
                 'enabled' => $workResult->enabled,
+                'index' => $workResult->index,
                 'href' => route('work_results.show', ['id' => $workResult->id])
             );
             $data[] = $item;

@@ -16,6 +16,7 @@ class CreateWorkResultsTable extends Migration
         Schema::create('work_results', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
+            $table->integer('index');
             $table->boolean('enabled')->default(true);
             $table->timestamps();
             $table->softDeletes();

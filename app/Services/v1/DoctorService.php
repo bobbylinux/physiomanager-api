@@ -32,7 +32,7 @@ class DoctorService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $doctors = Doctor::with($withKeys)->where($whereClauses)->get();
+            $doctors = Doctor::with($withKeys)->orderBy('last_name')->orderBy('first_name')->where($whereClauses)->get();
             $doctors = $this->filterDoctors($doctors, $withKeys);
         }
 

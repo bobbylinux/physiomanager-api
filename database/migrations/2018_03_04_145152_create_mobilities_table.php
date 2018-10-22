@@ -16,6 +16,7 @@ class CreateMobilitiesTable extends Migration
         Schema::create('mobilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description',64);
+            $table->integer('index');
             $table->boolean('enabled')->default(true);
             $table->timestamps();
             $table->softDeletes();

@@ -99,6 +99,7 @@ class SessionService extends BaseService
                 'date' => $session->date,
                 'units' => $session->units,
                 'price' => $session->price,
+                'note' => $session->note,
                 'href' => route('sessions.show', ['id' => $session->id])
             );
             $data[] = $item;

@@ -14,10 +14,12 @@ class MobilityService extends BaseService
         $this->clauseProperties = array(
             'id',
             'description',
+            'index',
             'enabled'
         );
         $this->rules = array(
             'description' => 'required|max:255',
+            'index' => 'required|integer',
             'enabled' => 'required|boolean'
         );
     }
@@ -29,7 +31,7 @@ class MobilityService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $mobilities = Mobility::with($withKeys)->where($whereClauses)->get();
+            $mobilities = Mobility::with($withKeys)->where($whereClauses)->orderBy('index')->get();
             $mobilities = $this->filterMobilities($mobilities, $withKeys);
         }
 
@@ -44,6 +46,7 @@ class MobilityService extends BaseService
 
         $mobility->description = $request->input("description");
         $mobility->enabled = $request->input("enabled");
+        $mobility->index = $request->input("index");
         $mobility->save();
 
         return $this->filterMobilities(array($mobility));
@@ -56,6 +59,7 @@ class MobilityService extends BaseService
         $mobility = Mobility::findOrFail($id);
         $mobility->description = $request->input("description");
         $mobility->enabled = $request->input("enabled");
+        $mobility->index = $request->input("index");
 
         $mobility->save();
 
@@ -76,6 +80,7 @@ class MobilityService extends BaseService
             $item = array(
                 'id' => $mobility->id,
                 'description' => $mobility->description,
+                'index' => $mobility->index,
                 'enabled' => $mobility->enabled,
                 'href' => route('mobilities.show', ['id' => $mobility->id])
             );

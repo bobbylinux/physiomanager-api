@@ -30,7 +30,7 @@ class ProgramService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $programs = Program::with($withKeys)->where($whereClauses)->get();
+            $programs = Program::with($withKeys)->where($whereClauses)->orderBy('title')->get();
             $programs = $this->filterPrograms($programs, $withKeys);
         }
 

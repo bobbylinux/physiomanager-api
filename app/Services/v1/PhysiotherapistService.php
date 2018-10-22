@@ -32,7 +32,7 @@ class PhysiotherapistService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $physiotherapists = Physiotherapist::with($withKeys)->where($whereClauses)->get();
+            $physiotherapists = Physiotherapist::with($withKeys)->where($whereClauses)->orderBy('last_name')->get();
             $physiotherapists = $this->filterPhysiotherapists($physiotherapists, $withKeys);
         }
 

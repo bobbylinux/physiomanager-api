@@ -14,10 +14,12 @@ class PainService extends BaseService
         $this->clauseProperties = array(
             'id',
             'description',
+            'index',
             'enabled'
         );
         $this->rules = array(
             'description' => 'required|max:255',
+            'index' => 'required|integer',
             'enabled' => 'required|boolean'
         );
     }
@@ -29,7 +31,7 @@ class PainService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $pains = Pain::with($withKeys)->where($whereClauses)->get();
+            $pains = Pain::with($withKeys)->where($whereClauses)->orderBy('index')->get();
             $pains = $this->filterPains($pains, $withKeys);
         }
 
@@ -43,6 +45,7 @@ class PainService extends BaseService
         $pain = new Pain();
 
         $pain->description = $request->input("description");
+        $pain->index = $request->input("index");
         $pain->enabled = $request->input("enabled");
         $pain->save();
 
@@ -55,6 +58,7 @@ class PainService extends BaseService
 
         $pain = Pain::findOrFail($id);
         $pain->description = $request->input("description");
+        $pain->index = $request->input("index");
         $pain->enabled = $request->input("enabled");
 
         $pain->save();
@@ -77,6 +81,7 @@ class PainService extends BaseService
                 'id' => $pain->id,
                 'description' => $pain->description,
                 'enabled' => $pain->enabled,
+                'index' => $pain->index,
                 'href' => route('pains.show', ['id' => $pain->id])
             );
             $data[] = $item;

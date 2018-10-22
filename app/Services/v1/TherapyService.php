@@ -32,7 +32,7 @@ class TherapyService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $therapies = Therapy::with($withKeys)->where($whereClauses)->get();
+            $therapies = Therapy::with($withKeys)->where($whereClauses)->orderBy('description')->get();
             $therapies = $this->filterTherapies($therapies, $withKeys);
         }
 

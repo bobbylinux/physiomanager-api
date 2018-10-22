@@ -108,6 +108,7 @@ class PlanService extends BaseService
                 'work_result_id' => $plan->work_result_id,
                 'program' => $plan->program,
                 'medical_certificate' => $plan->medical_certificate,
+                'created_at' => $plan->created_at,
                 'href' => route('plans.show', ['id' => $plan->id])
             );
 
@@ -117,6 +118,7 @@ class PlanService extends BaseService
                         $item['sessions'][] = array(
                             'id' => $session->id,
                             'date' => $session->date,
+                            'note' => $session->note,
                             'therapy_id' => $session->therapy_id,
                             'therapy' => array(
                                 'id' =>  $session->therapy->id,
