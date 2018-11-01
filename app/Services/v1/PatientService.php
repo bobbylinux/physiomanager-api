@@ -32,7 +32,7 @@ class PatientService extends BaseService
             'birthday' => 'date|before:tomorrow|after:1900-01-01',
             'place_of_birth' => 'max:255',
             'detail.phone_number' => 'required|max:255',
-            'detail.email' => 'email|max:255'
+            'detail.email' => 'nullable|email|max:255'
         );
     }
 
@@ -43,7 +43,7 @@ class PatientService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters, TRUE);
-            $patients = Patient::with($withKeys)->where($whereClauses)->get();
+            $patients = Patient::with($withKeys)->where($whereClauses)->orderBy('last_name')->orderBy('first_name')->get();
             $patients = $this->filterPatients($patients, $withKeys);
         }
 
