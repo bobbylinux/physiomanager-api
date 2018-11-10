@@ -174,6 +174,9 @@ return [
         App\Providers\v1\PlanServiceProvider::class,
         App\Providers\v1\SessionServiceProvider::class,
 
+        /* JWT-Auth */
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
     ],
 
     /*
