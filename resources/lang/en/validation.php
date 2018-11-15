@@ -88,7 +88,6 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
 
-    'patient_sex'                  => "The :attribute can be only 'M' or 'F'",
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines

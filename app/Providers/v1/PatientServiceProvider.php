@@ -15,9 +15,6 @@ class PatientServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        validator::extend('patient_sex', function($attribute, $value, $parameters, $validator){
-            return $value == "M" || $value == "F";
-        });
     }
 
     /**
