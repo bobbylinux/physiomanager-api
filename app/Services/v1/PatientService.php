@@ -21,14 +21,12 @@ class PatientService extends BaseService
             'id',
             'tax_code',
             'last_name',
-            'first_name',
-            'sex'
+            'first_name'
         );
         $this->rules = array(
             'last_name' => 'required|max:255',
             'first_name' => 'required|max:255',
-            'tax_code' => 'required|size:16',
-            'sex' => 'required|patient_sex',
+            'tax_code' => 'size:16',
             'birthday' => 'date|before:tomorrow|after:1900-01-01',
             'place_of_birth' => 'max:255',
             'detail.phone_number' => 'required|max:255',
@@ -60,7 +58,6 @@ class PatientService extends BaseService
         $patient->last_name = $request->input("last_name");
         $patient->first_name = $request->input("first_name");
         $patient->tax_code = $request->input("tax_code");
-        $patient->sex = $request->input("sex");
         $patient->birthday = $request->input("birthday");
         $patient->place_of_birth = $request->input("place_of_birth");
 
@@ -68,6 +65,7 @@ class PatientService extends BaseService
 
         $detail = new PatientDetail();
 
+        $detail->doctor_id = $request->input("detail.doctor_id");
         $detail->address = $request->input("detail.address");
         $detail->city = $request->input("detail.city");
         $detail->phone_number = $request->input("detail.phone_number");
@@ -86,7 +84,6 @@ class PatientService extends BaseService
         $patient->last_name = $request->input("last_name");
         $patient->first_name = $request->input("first_name");
         $patient->tax_code = $request->input("tax_code");
-        $patient->sex = $request->input("sex");
         $patient->birthday = $request->input("birthday");
         $patient->place_of_birth = $request->input("place_of_birth");
 
@@ -94,6 +91,7 @@ class PatientService extends BaseService
 
         $detail = new PatientDetail();
 
+        $detail->doctor_id = $request->input("detail.doctor_id");
         $detail->address = $request->input("detail.address");
         $detail->city = $request->input("detail.city");
         $detail->phone_number = $request->input("detail.phone_number");
@@ -123,7 +121,6 @@ class PatientService extends BaseService
                 'first_name' => $patient->first_name,
                 'last_name' => $patient->last_name,
                 'tax_code' => $patient->tax_code,
-                'sex' => $patient->sex,
                 'birthday' => $birthday->format('d-m-Y'),
                 'place_of_birth' => $patient->place_of_birth,
                 'href' => route('patients.show', ['id' => $patient->id])
@@ -132,6 +129,7 @@ class PatientService extends BaseService
             if (in_array('lastDetail', $keys)) {
                 if (isset($patient->lastDetail)) {
                     $item['detail'] = array(
+                        'doctor_id' => $patient->lastDetail->doctor_id,
                         'address' => $patient->lastDetail->address,
                         'city' => $patient->lastDetail->city,
                         'phone_number' => $patient->lastDetail->phone_number,

@@ -21,7 +21,6 @@ $factory->define(Patient::class, function (Faker $faker) {
         'last_name' => $faker->lastName,
         'first_name' => $faker->firstName,
         'tax_code' => strtoupper(str_random(16)),
-        'sex' => $faker->boolean ? "M" : "F",
         'birthday' => $faker->date(),
         'place_of_birth' => $faker->city,
         'created_at' => now(),

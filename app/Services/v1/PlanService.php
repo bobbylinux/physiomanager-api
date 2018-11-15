@@ -59,7 +59,6 @@ class PlanService extends BaseService
         $plan->medical_certificate = $request->input("medical_certificate");
         $plan->work_result_id = $request->input("work_result_id");
         $plan->pain_id = $request->input("pain_id");
-        $plan->mobility_id = $request->input("mobility_id");
         $plan->save();
 
         return $this->filterPlans(array($plan));
@@ -78,7 +77,6 @@ class PlanService extends BaseService
         $plan->medical_certificate = $request->input("medical_certificate");
         $plan->work_result_id = $request->input("work_result_id");
         $plan->pain_id = $request->input("pain_id");
-        $plan->mobility_id = $request->input("mobility_id");
 
         $plan->save();
 
@@ -104,7 +102,6 @@ class PlanService extends BaseService
                 'final_report' => $plan->final_report,
                 'privacy' => $plan->privacy,
                 'pain_id' => $plan->pain_id,
-                'mobility_id' => $plan->mobility_id,
                 'work_result_id' => $plan->work_result_id,
                 'program' => $plan->program,
                 'medical_certificate' => $plan->medical_certificate,
@@ -179,7 +176,6 @@ class PlanService extends BaseService
                         'last_name' => $plan->patient->last_name,
                         'first_name' => $plan->patient->first_name,
                         'tax_code' => $plan->patient->tax_code,
-                        'sex' => $plan->patient->sex,
                         'birthday' => $plan->patient->birthday,
                         'place_of_birth' => $plan->patient->place_of_birth
                     );

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMobilitiesTable extends Migration
+class CreateNotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateMobilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mobilities', function (Blueprint $table) {
+        Schema::create('notes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description',64);
-            $table->integer('index');
-            $table->boolean('enabled')->default(true);
+            $table->longText('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +28,6 @@ class CreateMobilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobilities');
+        Schema::dropIfExists('notes');
     }
 }

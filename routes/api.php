@@ -13,46 +13,62 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([
+    'prefix' => 'v1'
+
+], function ($router) {
+// /api/patients
+    Route::middleware('jwt.auth')->resource('patients', v1\PatientController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/doctors
+    Route::middleware('jwt.auth')->resource('doctors', v1\DoctorController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/physiotherapists
+    Route::middleware('jwt.auth')->resource('physiotherapists', v1\PhysiotherapistController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/therapies
+    Route::middleware('jwt.auth')->resource('therapies', v1\TherapyController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/programs
+    Route::middleware('jwt.auth')->resource('programs', v1\ProgramController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/work_results
+    Route::middleware('jwt.auth')->resource('work_results', v1\WorkResultController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/pains
+    Route::middleware('jwt.auth')->resource('pains', v1\PainController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/mobilities
+    Route::middleware('jwt.auth')->resource('mobilities', v1\MobilityController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/plans
+    Route::middleware('jwt.auth')->resource('plans', v1\PlanController::class, [
+        'except' => ['create', 'edit']
+    ]);
+// /api/sessions
+    Route::middleware('jwt.auth')->resource('sessions', v1\SessionController::class, [
+        'except' => ['create', 'edit']
+    ]);
 });
-// /api/v1/patients
-Route::resource('v1/patients',v1\PatientController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/doctors
-Route::resource('v1/doctors',v1\DoctorController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/physiotherapists
-Route::resource('v1/physiotherapists',v1\PhysiotherapistController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/therapies
-Route::resource('v1/therapies',v1\TherapyController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/programs
-Route::resource('v1/programs',v1\ProgramController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/work_results
-Route::resource('v1/work_results',v1\WorkResultController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/pains
-Route::resource('v1/pains',v1\PainController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/mobilities
-Route::resource('v1/mobilities',v1\MobilityController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/plans
-Route::resource('v1/plans',v1\PlanController::class, [
-    'except' => ['create','edit']
-]);
-// /api/v1/sessions
-Route::resource('v1/sessions',v1\SessionController::class, [
-    'except' => ['create','edit']
-]);
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+
+});
