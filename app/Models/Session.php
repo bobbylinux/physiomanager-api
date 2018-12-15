@@ -20,4 +20,11 @@ class Session extends Model
     {
         return $this->belongsTo('App\Models\Physiotherapist');
     }
+    /**
+     * Get the session plan.
+     */
+    public function plan()
+    {
+        return $this->belongsTo('App\Models\Plan');
+    }
 }
