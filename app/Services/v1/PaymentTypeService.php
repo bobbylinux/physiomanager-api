@@ -32,7 +32,7 @@ class PaymentTypeService extends BaseService
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $paymentType = PaymentType::with($withKeys)->where($whereClauses)->orderBy('index')->get();
+            $paymentType = PaymentType::with($withKeys)->where($whereClauses)->orderBy('description')->get();
             $paymentType = $this->filterPaymentType($paymentType, $withKeys);
         }
 
