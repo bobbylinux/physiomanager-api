@@ -63,7 +63,7 @@ Route::group([
         'except' => ['create', 'edit']
     ]);
 // /api/sessions
-    Route::middleware('jwt.auth')->resource('payments', v1\PaymentController::class, [
+    Route::resource('payments', v1\PaymentController::class, [
         'except' => ['create', 'edit']
     ]);
 

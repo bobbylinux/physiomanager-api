@@ -36,11 +36,11 @@ class PaymentService extends BaseService
     {
 
         if (empty($parameters)) {
-            $payment = $this->filterPayment(Payment::all());
+            $payment = $this->filterPayment(Payment::orderBy('created_at')->all());
         } else {
             $withKeys = $this->getWithKeys($parameters);
             $whereClauses = $this->getWhereClause($parameters);
-            $payment = Payment::with($withKeys)->where($whereClauses)->get();
+            $payment = Payment::with($withKeys)->where($whereClauses)->orderBy('created_at')->get();
             $payment = $this->filterPayment($payment, $withKeys);
         }
 
@@ -94,6 +94,7 @@ class PaymentService extends BaseService
                 'id' => $payment->id,
                 'amount' => $payment->amount,
                 'plan_id' => $payment->plan_id,
+                'date' => $payment->created_at,
                 'payment_type_id' => $payment->payment_type_id,
                 'href' => route('payments.show', ['id' => $payment->id])
             );
