@@ -136,17 +136,6 @@ class PlanService extends BaseService
                 }
             }
 
-            if (in_array('mobility', $keys)) {
-                if (isset($plan->mobility)) {
-                    $item['mobility'] = array(
-                        'id' => $plan->mobility->id,
-                        'decription' => $plan->mobility->description
-                    );
-                } else {
-                    $item['mobility'] = array();
-                }
-            }
-
             if (in_array('pain', $keys)) {
                 if (isset($plan->pain)) {
                     $item['pain'] = array(
@@ -159,7 +148,7 @@ class PlanService extends BaseService
             }
 
             if (in_array('work_result', $keys)) {
-                if (isset($plan->pain)) {
+                if (isset($plan->work_result)) {
                     $item['work_result'] = array(
                         'id' => $plan->work_result->id,
                         'decription' => $plan->work_result->description

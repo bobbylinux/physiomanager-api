@@ -50,7 +50,7 @@ Route::group([
         'except' => ['create', 'edit']
     ]);
 // /api/plans
-    Route::middleware('jwt.auth')->resource('plans', v1\PlanController::class, [
+    Route::/*middleware('jwt.auth')->*/resource('plans', v1\PlanController::class, [
         'except' => ['create', 'edit']
     ]);
 // /api/sessions
