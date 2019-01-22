@@ -3,6 +3,7 @@
 namespace App\Services\v1;
 
 use App\Models\Plan;
+use Illuminate\Support\Facades\Log;
 
 class PlanService extends BaseService
 {
@@ -47,7 +48,9 @@ class PlanService extends BaseService
     public function createPlan($request)
     {
         $this->validate($request->all());
-
+        Log::info(
+            $request->input()
+        );
         $plan = new Plan();
 
         $plan->patient_id = $request->input("patient_id");
