@@ -81,6 +81,8 @@ class PlanService extends BaseService
         $plan->work_result_id = $request->input("work_result_id");
         $plan->pain_id = $request->input("pain_id");
 
+        Log::debug($plan);
+
         $plan->save();
 
         return $this->filterPlans(array($plan));
