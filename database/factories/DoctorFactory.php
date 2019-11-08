@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Doctor;
 use Faker\Generator as Faker;
 
 /*
@@ -13,11 +14,12 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(Doctor::class, function (Faker $faker) {
+
     return [
-        'name' => 'Roberto Bani',
-        'email' => 'roberto.bani@gmail.com',
-        'password' => '$2y$10$8EaPNv0NrhzS.huwUWKomewh02qCQg5Yj1wL3i8eMdr5NV7c2xdJa', // secret
-        'remember_token' => str_random(10),
+        'last_name' => $faker->lastName,
+        'first_name' => $faker->firstName,
+        'enabled' => true,
+        'created_at' => now(),
     ];
 });

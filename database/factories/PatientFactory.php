@@ -33,6 +33,7 @@ $factory->define(PatientDetail::class, function (Faker $faker) {
 
     return [
         'patient_id' => $faker->numberBetween(1,30),
+        'doctor_id' => $faker->numberBetween(1,10),
         'address' => $faker->address,
         'city' => $faker->city,
         'phone_number' => $faker->phoneNumber,
