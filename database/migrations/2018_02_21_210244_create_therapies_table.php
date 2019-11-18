@@ -15,7 +15,7 @@ class CreateTherapiesTable extends Migration
     {
         Schema::create('therapies', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description', 255);
+            $table->string('description');
             $table->boolean('enabled')->default(true);
             $table->decimal('price', 8, 2);
             $table->timestamps();
