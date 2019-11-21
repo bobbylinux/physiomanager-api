@@ -95,6 +95,7 @@ class PaymentService extends BaseService
                 'amount' => $payment->amount,
                 'plan_id' => $payment->plan_id,
                 'payment_type_id' => $payment->payment_type_id,
+                'created_at' => (string) $payment->created_at,
                 'href' => route('payments.show', ['id' => $payment->id])
             );
 
@@ -102,7 +103,7 @@ class PaymentService extends BaseService
                 if (isset($payment->payment_type)) {
                     $item['payment_type'] = array(
                         'id' => $payment->payment_type->id,
-                        'decription' => $payment->payment_type->description
+                        'description' => $payment->payment_type->description
                     );
                 } else {
                     $item['payment_type'] = array();
@@ -113,7 +114,7 @@ class PaymentService extends BaseService
                 if (isset($payment->payment_type)) {
                     $item['payment_type'] = array(
                         'id' => $payment->payment_type->id,
-                        'decription' => $payment->payment_type->description
+                        'description' => $payment->payment_type->description
                     );
                 } else {
                     $item['payment_type'] = array();

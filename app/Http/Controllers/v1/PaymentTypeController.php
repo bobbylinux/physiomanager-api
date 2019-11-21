@@ -63,7 +63,7 @@ class PaymentTypeController extends Controller
         $parameters = request()->input();
         $parameters['id'] = $id;
 
-        $data = $this->paymentTypes->getPaymentTypes($parameters);
+        $data = $this->paymentTypes->getPaymentType($parameters);
 
         return response()->json(['data' => $data]);
     }

@@ -27,7 +27,6 @@ class PatientService extends BaseService
             'last_name' => 'required|max:255',
             'first_name' => 'required|max:255',
             'tax_code' => 'size:16',
-            'birthday' => 'date|before:tomorrow|after:1900-01-01',
             'place_of_birth' => 'max:255',
             'detail.phone_number' => 'required|max:255',
             'detail.email' => 'nullable|email|max:255'

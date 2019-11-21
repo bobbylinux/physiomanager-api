@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('plan_id');
             $table->integer('payment_type_id');
             $table->double('amount');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
             /*foreign keys*/

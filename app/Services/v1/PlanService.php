@@ -23,7 +23,8 @@ class PlanService extends BaseService
 
         $this->clauseProperties = array(
             'id',
-            'patient_id'
+            'patient_id',
+            'enabled'
         );
         $this->rules = array(
             'patient_id' => 'required'
@@ -140,7 +141,7 @@ class PlanService extends BaseService
                 if (isset($plan->mobility)) {
                     $item['mobility'] = array(
                         'id' => $plan->mobility->id,
-                        'decription' => $plan->mobility->description
+                        'description' => $plan->mobility->description
                     );
                 } else {
                     $item['mobility'] = array();
@@ -151,7 +152,7 @@ class PlanService extends BaseService
                 if (isset($plan->pain)) {
                     $item['pain'] = array(
                         'id' => $plan->pain->id,
-                        'decription' => $plan->pain->description
+                        'description' => $plan->pain->description
                     );
                 } else {
                     $item['pain'] = array();
@@ -162,7 +163,7 @@ class PlanService extends BaseService
                 if (isset($plan->pain)) {
                     $item['work_result'] = array(
                         'id' => $plan->work_result->id,
-                        'decription' => $plan->work_result->description
+                        'description' => $plan->work_result->description
                     );
                 } else {
                     $item['work_result'] = array();
