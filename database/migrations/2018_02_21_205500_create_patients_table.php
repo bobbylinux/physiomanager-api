@@ -18,8 +18,8 @@ class CreatePatientsTable extends Migration
             $table->string('last_name', 255);
             $table->string('first_name', 255);
             $table->string('tax_code', 16);
-            $table->date('birthday');
-            $table->string('place_of_birth',255);
+            $table->date('birthday')->nullable();
+            $table->string('place_of_birth',255)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
