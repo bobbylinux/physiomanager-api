@@ -97,6 +97,7 @@ class PaymentService extends BaseService
                 'note' => $payment->note,
                 'date' => $payment->created_at,
                 'payment_type_id' => $payment->payment_type_id,
+                'created_at' => (string) $payment->created_at,
                 'href' => route('payments.show', ['id' => $payment->id])
             );
 

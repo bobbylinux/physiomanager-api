@@ -3,7 +3,6 @@
 namespace App\Services\v1;
 
 use App\Models\Plan;
-use Illuminate\Support\Facades\Log;
 
 class PlanService extends BaseService
 {
@@ -24,7 +23,8 @@ class PlanService extends BaseService
 
         $this->clauseProperties = array(
             'id',
-            'patient_id'
+            'patient_id',
+            'enabled'
         );
         $this->rules = array(
             'patient_id' => 'required'
@@ -48,9 +48,7 @@ class PlanService extends BaseService
     public function createPlan($request)
     {
         $this->validate($request->all());
-        Log::info(
-            $request->input()
-        );
+
         $plan = new Plan();
 
         $plan->patient_id = $request->input("patient_id");
@@ -80,8 +78,6 @@ class PlanService extends BaseService
         $plan->medical_certificate = $request->input("medical_certificate");
         $plan->work_result_id = $request->input("work_result_id");
         $plan->pain_id = $request->input("pain_id");
-
-        Log::debug($plan);
 
         $plan->save();
 
@@ -141,11 +137,22 @@ class PlanService extends BaseService
                 }
             }
 
+            if (in_array('mobility', $keys)) {
+                if (isset($plan->mobility)) {
+                    $item['mobility'] = array(
+                        'id' => $plan->mobility->id,
+                        'description' => $plan->mobility->description
+                    );
+                } else {
+                    $item['mobility'] = array();
+                }
+            }
+
             if (in_array('pain', $keys)) {
                 if (isset($plan->pain)) {
                     $item['pain'] = array(
                         'id' => $plan->pain->id,
-                        'decription' => $plan->pain->description
+                        'description' => $plan->pain->description
                     );
                 } else {
                     $item['pain'] = array();
@@ -156,7 +163,7 @@ class PlanService extends BaseService
                 if (isset($plan->work_result)) {
                     $item['work_result'] = array(
                         'id' => $plan->work_result->id,
-                        'decription' => $plan->work_result->description
+                        'description' => $plan->work_result->description
                     );
                 } else {
                     $item['work_result'] = array();

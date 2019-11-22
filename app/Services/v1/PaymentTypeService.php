@@ -17,7 +17,8 @@ class PaymentTypeService extends BaseService
 
         $this->clauseProperties = array(
             'id',
-            'description'
+            'description',
+            'enabled'
         );
         $this->rules = array(
             'description' => 'required'
@@ -81,6 +82,7 @@ class PaymentTypeService extends BaseService
             $item = array(
                 'id' => $paymentType->id,
                 'description' => $paymentType->description,
+                'enabled' => $paymentType->enabled,
                 'href' => route('payment_types.show', ['id' => $paymentType->id])
             );
 
