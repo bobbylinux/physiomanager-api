@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Middleware;
 use Closure;
-class corsMiddleware
+class Cors
 {
     /**
      * @param $request
